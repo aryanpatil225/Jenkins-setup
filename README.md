@@ -1,22 +1,24 @@
-# Pay1 To-Do
+# Pay1 IT Support
 
-A small red-and-black Pay1-themed to-do app. It has a responsive browser UI, a Node.js HTTP backend, and JSON-file persistence. No third-party packages are required (Node.js 18+ recommended).
+A responsive Pay1-themed IT ticket-raising platform with a Node.js HTTP backend and JSON-file persistence.
 
-## Run with the backend
+## Run locally
 
 ```sh
 node server.js
 ```
 
-Open <http://localhost:3000>. Tasks are stored in `data/tasks.json`, which the server creates on first write. Set `PORT` to choose another port, for example `PORT=8080 node server.js`.
+Open <http://localhost:3000>. Set `PORT` to use another port:
 
-The API supports:
+```sh
+PORT=8080 node server.js
+```
 
-- `GET /api/tasks` — list tasks
-- `POST /api/tasks` — create a task with `{ "text": "..." }`
-- `PATCH /api/tasks/:id` — update completion with `{ "completed": true }`
-- `DELETE /api/tasks/:id` — remove a task
+Tickets are stored in `data/tickets.json`. The existing Jenkins pipeline continues to deploy `index.html` to NGINX on EC2. When no API is available, the browser falls back to `localStorage`.
 
-## Static hosting
+## API
 
-The existing Jenkins pipeline publishes `index.html` to a static web server. The page detects when the API is unavailable and falls back to browser `localStorage`, so the to-do list remains usable on that existing static deployment. Run `node server.js` to enable the shared, file-backed backend; the frontend and API are served together by that server.
+- `GET /api/tickets` — list tickets
+- `POST /api/tickets` — raise a ticket
+- `PATCH /api/tickets/:id` — update status or priority
+- `DELETE /api/tickets/:id` — remove a ticket
