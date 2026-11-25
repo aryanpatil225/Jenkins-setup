@@ -3,149 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ed1c24">
-  <title>Pay1 IT Support</title>
+  <title>Pay1</title>
   <style>
-    :root { --red:#ed1c24; --ink:#151515; --cream:#fffaf7; --muted:#746e6b; --line:#ded5d1; --green:#14804a; --amber:#b46900; }
-    * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; color:var(--ink); background:#f3efec; font-family:Inter,Arial,sans-serif; }
-    button,input,select,textarea { font:inherit; }
-    button { cursor:pointer; }
-    .shell { min-height:100vh; display:grid; grid-template-columns:220px 1fr; }
-    aside { position:sticky; top:0; height:100vh; display:flex; flex-direction:column; padding:24px 18px; border-right:3px solid var(--ink); background:var(--red); }
-    .brand { display:flex; align-items:center; gap:10px; color:white; }
-    .logo { display:grid; width:42px; height:42px; place-items:center; border:2px solid var(--ink); border-radius:11px; color:var(--ink); background:white; font-size:21px; font-weight:950; }
-    .brand-name { font-size:20px; font-weight:950; letter-spacing:-.04em; }
-    nav { display:grid; gap:8px; margin-top:38px; }
-    nav button { display:flex; align-items:center; gap:10px; width:100%; padding:11px 12px; border:2px solid transparent; border-radius:9px; color:white; background:transparent; text-align:left; font-weight:800; }
-    nav button.active { border-color:var(--ink); color:var(--ink); background:white; box-shadow:3px 3px 0 var(--ink); }
-    .nav-icon { width:18px; text-align:center; }
-    .profile { display:flex; align-items:center; gap:9px; margin-top:auto; padding-top:14px; border-top:2px solid #b8000b; color:white; }
-    .avatar { display:grid; width:38px; height:38px; place-items:center; border:2px solid var(--ink); border-radius:50%; color:var(--ink); background:white; font-weight:900; }
-    .profile small { display:block; opacity:.8; }
-    main { min-width:0; }
-    .topbar { height:72px; display:flex; align-items:center; gap:18px; padding:0 32px; border-bottom:2px solid var(--ink); background:white; }
-    .search { flex:1; max-width:420px; }
-    .search input { width:100%; height:42px; padding:0 14px; border:2px solid var(--ink); border-radius:9px; background:#fffdfb; }
-    .top-actions { margin-left:auto; display:flex; align-items:center; gap:10px; }
-    .primary { min-height:42px; padding:0 16px; border:2px solid var(--ink); border-radius:9px; color:white; background:var(--red); font-weight:900; box-shadow:3px 3px 0 var(--ink); }
-    .primary:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
-    .content { padding:28px 32px 40px; }
-    .page-head { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:22px; }
-    h1 { margin:0; font-size:34px; letter-spacing:-.04em; }
-    .date { color:var(--muted); font-size:13px; }
-    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px; }
-    .stat { min-height:106px; padding:17px; border:2px solid var(--ink); border-radius:12px; background:white; box-shadow:4px 4px 0 var(--ink); }
-    .stat-label { color:var(--muted); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
-    .stat-value { margin-top:8px; font-size:32px; line-height:1; font-weight:950; }
-    .stat-note { margin-top:8px; color:var(--muted); font-size:12px; }
-    .panel { overflow:hidden; border:2px solid var(--ink); border-radius:12px; background:white; }
-    .panel-head { display:flex; align-items:center; gap:10px; min-height:58px; padding:10px 14px; border-bottom:2px solid var(--ink); }
-    .panel-head h2 { margin-right:auto; font-size:16px; }
-    .tabs { display:flex; gap:6px; }
-    .tab { padding:7px 10px; border:2px solid transparent; border-radius:8px; background:transparent; color:var(--muted); font-size:12px; font-weight:850; }
-    .tab.active { border-color:var(--ink); color:var(--ink); background:#fff1ef; }
-    table { width:100%; border-collapse:collapse; }
-    th { padding:10px 14px; color:var(--muted); background:#faf7f5; border-bottom:1px solid var(--line); text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; }
-    td { padding:14px; border-bottom:1px solid var(--line); font-size:13px; }
-    tbody tr { cursor:pointer; }
-    tbody tr:hover { background:#fff9f8; }
-    tbody tr:last-child td { border-bottom:0; }
-    .ticket-id { color:var(--red); font-weight:900; }
-    .subject { max-width:360px; }
-    .subject strong { display:block; margin-bottom:3px; }
-    .subject span { color:var(--muted); }
-    .badge { display:inline-flex; align-items:center; gap:6px; padding:5px 8px; border:1.5px solid var(--ink); border-radius:999px; font-size:11px; font-weight:850; }
-    .badge::before { content:""; width:7px; height:7px; border-radius:50%; background:#888; }
-    .badge.open::before { background:var(--red); }.badge.progress::before { background:var(--amber); }.badge.resolved::before { background:var(--green); }
-    .priority { font-weight:900; }.priority.high { color:var(--red); }.priority.medium { color:var(--amber); }.priority.low { color:var(--green); }
-    .modal-backdrop { position:fixed; inset:0; z-index:20; display:none; place-items:center; padding:20px; background:rgba(21,21,21,.48); }
-    .modal-backdrop.open { display:grid; }
-    .modal { width:min(620px,100%); max-height:90vh; overflow:auto; border:3px solid var(--ink); border-radius:14px; background:var(--cream); box-shadow:8px 8px 0 var(--ink); }
-    .modal-head { display:flex; align-items:center; justify-contentspace-between; padding:18px 20px; border-bottom:2px solid var(--ink); background:var(--red); color:white; }
-    .modal-head h2 { margin:0; font-size:20px; }.modal-head button { margin-left:auto; width:34px; height:34px; border:2px solid var(--ink); border-radius:8px; background:white; }
-    form { display:grid; gap:14px; padding:20px; }
-    .field { display:grid; gap:7px; }.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    label { font-size:12px; font-weight:900; }
-    input,select,textarea { width:100%; border:2px solid var(--ink); border-radius:8px; background:white; }
-    input,select { height:44px; padding:0 11px; } textarea { min-height:110px; resize:vertical; padding:10px 11px; }
-    .form-actions { display:flex; justify-content:flex-end; gap:9px; padding-top:4px; }.secondary { min-height:42px; padding:0 14px; border:2px solid var(--ink); border-radius:9px; background:white; font-weight:850; }
-    .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:20px; }.detail-block { padding:12px; border:1.5px solid var(--line); border-radius:8px; }.detail-block.full { grid-column:1/-1; }.detail-block small { display:block; color:var(--muted); font-weight:800; margin-bottom:5px; }
-    .empty { padding:42px 20px; color:var(--muted); text-align:center; }
-    @media(max-width:900px) { .shell { grid-template-columns:74px 1fr; } aside { padding:18px 10px; } .brand-name,nav button span:last-child,.profile div:last-child { display:none; } nav button { justify-content:center; } .brand { justify-content:center; }.profile { justify-content:center; }.stats { grid-template-columns:1fr 1fr; } }
-    @media(max-width:620px) { .shell { display:block; } aside { position:fixed; z-index:10; bottom:0; top:auto; width:100%; height:62px; flex-direction:row; padding:8px 12px; border-top:2px solid var(--ink); border-right:0; } .brand,.profile { display:none; } nav { width:100%; display:grid; grid-template-columns:repeat(3,1fr); margin:0; } nav button { height:44px; } nav button span:last-child { display:inline; }.topbar { height:auto; min-height:64px; padding:10px 14px; }.search { max-width:none; }.top-actions .primary { width:42px; padding:0; font-size:0; }.top-actions .primary::after { content:"+"; font-size:22px; }.content { padding:20px 14px 82px; }.stats { grid-template-columns:1fr 1fr; gap:10px; }.stat { min-height:92px; box-shadow:3px 3px 0 var(--ink); }.panel { overflow-x:auto; } table { min-width:680px; }.field-row,.detail-grid { grid-template-columns:1fr; }.detail-block.full { grid-column:auto; } }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #e0f2ff;
+      border: 4px solid #000;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin: 0;
+      color: #f00;
+      font-size: clamp(4rem, 16vw, 10rem);
+      font-weight: 900;
+      -webkit-text-stroke: 3px #000;
+      paint-order: stroke fill;
+    }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <aside>
-      <div class="brand"><div class="logo">P</div><div class="brand-name">Pay1</div></div>
-      <nav><button class="active" type="button"><span class="nav-icon">▦</span><span>Dashboard</span></button><button type="button"><span class="nav-icon">◷</span><span>My tickets</span></button><button type="button"><span class="nav-icon">?</span><span>Knowledge base</span></button></nav>
-      <div class="profile"><div class="avatar">AP</div><div><strong>Aryan Patil</strong><small>Employee</small></div></div>
-    </aside>
-    <main>
-      <div class="topbar"><div class="search"><input id="search" type="search" placeholder="Search tickets..." aria-label="Search tickets"></div><div class="top-actions"><button class="primary" id="raise-button" type="button">＋ Raise ticket</button></div></div>
-      <div class="content">
-        <div class="page-head"><div><h1>IT Support</h1></div><div class="date" id="date"></div></div>
-        <section class="stats">
-          <div class="stat"><div class="stat-label">Open tickets</div><div class="stat-value" id="open-count">0</div><div class="stat-note">Needs attention</div></div>
-          <div class="stat"><div class="stat-label">In progress</div><div class="stat-value" id="progress-count">0</div><div class="stat-note">Being resolved</div></div>
-          <div class="stat"><div class="stat-label">Resolved</div><div class="stat-value" id="resolved-count">0</div><div class="stat-note">This month</div></div>
-          <div class="stat"><div class="stat-label">High priority</div><div class="stat-value" id="high-count">0</div><div class="stat-note">Immediate action</div></div>
-        </section>
-        <section class="panel">
-          <div class="panel-head"><h2>Recent tickets</h2><div class="tabs"><button class="tab active" type="button" data-filter="All">All</button><button class="tab" type="button" data-filter="Open">Open</button><button class="tab" type="button" data-filter="In Progress">In progress</button><button class="tab" type="button" data-filter="Resolved">Resolved</button></div></div>
-          <table><thead><tr><th>Ticket</th><th>Issue</th><th>Category</th><th>Priority</th><th>Status</th><th>Updated</th></tr></thead><tbody id="ticket-list"></tbody></table>
-        </section>
-      </div>
-    </main>
-  </div>
-
-  <div class="modal-backdrop" id="raise-modal"><div class="modal"><div class="modal-head"><h2>Raise an IT ticket</h2><button type="button" data-close aria-label="Close">×</button></div><form id="ticket-form">
-    <div class="field"><label for="subject">Subject</label><input id="subject" name="subject" maxlength="120" required placeholder="Brief summary of the issue"></div>
-    <div class="field"><label for="description">Description</label><textarea id="description" name="description" maxlength="2000" required placeholder="Describe what happened and what you have tried"></textarea></div>
-    <div class="field-row"><div class="field"><label for="category">Category</label><select id="category" name="category" required><option value="Hardware">Hardware</option><option value="Software">Software</option><option value="Network">Network</option><option value="Account">Account & access</option><option value="Email">Email</option><option value="Other">Other</option></select></div><div class="field"><label for="priority">Priority</label><select id="priority" name="priority" required><option>Low</option><option selected>Medium</option><option>High</option></select></div></div>
-    <div class="field-row"><div class="field"><label for="name">Your name</label><input id="name" name="name" maxlength="80" required value="Aryan Patil"></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" maxlength="120" required placeholder="you@pay1.com"></div></div>
-    <div class="form-actions"><button class="secondary" type="button" data-close>Cancel</button><button class="primary" type="submit">Submit ticket</button></div>
-  </form></div></div>
-
-  <div class="modal-backdrop" id="detail-modal"><div class="modal"><div class="modal-head"><h2 id="detail-title">Ticket details</h2><button type="button" data-detail-close aria-label="Close">×</button></div><div class="detail-grid" id="detail-content"></div></div></div>
-
-  <script>
-  (() => {
-    const STORAGE='pay1-tickets-v1'; const API='/api/tickets';
-    const raiseModal=document.querySelector('#raise-modal'), detailModal=document.querySelector('#detail-modal');
-    const form=document.querySelector('#ticket-form'), list=document.querySelector('#ticket-list'), search=document.querySelector('#search');
-    let tickets=[], filter='All', useApi=true;
-    const pad=n=>String(n).padStart(2,'0');
-    const now=()=>new Date().toISOString();
-    const timeAgo=value=>{const ms=Date.now()-new Date(value).getTime();const mins=Math.max(1,Math.floor(ms/60000));if(mins<60)return mins+'m ago';const hours=Math.floor(mins/60);if(hours<24)return hours+'h ago';return Math.floor(hours/24)+'d ago';};
-    const local=()=>{try{const v=JSON.parse(localStorage.getItem(STORAGE)||'[]');return Array.isArray(v)?v:[]}catch{return[]}};
-    const saveLocal=()=>localStorage.setItem(STORAGE,JSON.stringify(tickets));
-    async function api(path='',options={}){const r=await fetch(API+path,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});if(!r.ok)throw new Error('Request failed');return r.status===204?null:r.json();}
-    async function load(){try{tickets=await api();useApi=true}catch{tickets=local();useApi=false}render();}
-    async function persist(method,path='',body){if(useApi){try{return await api(path,{method,...(body?{body:JSON.stringify(body)}:{})})}catch{useApi=false}}saveLocal();}
-    function seed(){if(tickets.length)return;const base=Date.now();tickets=[
-      {id:'PAY-'+pad(1042),subject:'Laptop display flickering',description:'The external monitor flickers after the laptop wakes from sleep.',category:'Hardware',priority:'High',status:'Open',name:'Aryan Patil',email:'aryan@pay1.com',createdAt:new Date(base-3600000).toISOString(),updatedAt:new Date(base-1800000).toISOString()},
-      {id:'PAY-'+pad(1041),subject:'VPN authentication failure',description:'Unable to connect to the office VPN after a password reset.',category:'Network',priority:'High',status:'In Progress',name:'Aarav Shah',email:'aarav@pay1.com',createdAt:new Date(base-7200000).toISOString(),updatedAt:new Date(base-2700000).toISOString()},
-      {id:'PAY-'+pad(1040),subject:'Unable to access shared drive',description:'The finance shared drive is not visible in File Explorer.',category:'Account',priority:'Medium',status:'Open',name:'Meera Nair',email:'meera@pay1.com',createdAt:new Date(base-14400000).toISOString(),updatedAt:new Date(base-5400000).toISOString()},
-      {id:'PAY-'+pad(1039),subject:'Microsoft Teams keeps crashing',description:'Teams closes unexpectedly during video meetings.',category:'Software',priority:'Low',status:'Resolved',name:'Kabir Mehta',email:'kabir@pay1.com',createdAt:new Date(base-86400000).toISOString(),updatedAt:new Date(base-10800000).toISOString()}
-    ];saveLocal();}
-    function render(){
-      seed();
-      const query=search.value.trim().toLowerCase();const visible=tickets.filter(t=> (filter==='All'||t.status===filter)&&(!query||[t.id,t.subject,t.category,t.status,t.priority,t.name].join(' ').toLowerCase().includes(query)));
-      document.querySelector('#open-count').textContent=tickets.filter(t=>t.status==='Open').length;document.querySelector('#progress-count').textContent=tickets.filter(t=>t.status==='In Progress').length;document.querySelector('#resolved-count').textContent=tickets.filter(t=>t.status==='Resolved').length;document.querySelector('#high-count').textContent=tickets.filter(t=>t.priority==='High').length;
-      list.innerHTML='';if(!visible.length){list.innerHTML='<tr><td colspan="6"><div class="empty">No tickets found</div></td></tr>';return}
-      visible.forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td><span class="ticket-id">${esc(t.id)}</span></td><td class="subject"><strong>${esc(t.subject)}</strong><span>${esc(t.name)}</span></td><td>${esc(t.category)}</td><td><span class="priority ${t.priority.toLowerCase()}">${esc(t.priority)}</span></td><td><span class="badge ${t.status==='In Progress'?'progress':t.status.toLowerCase()}">${esc(t.status)}</span></td><td>${timeAgo(t.updatedAt)}</td>`;tr.addEventListener('click',()=>showDetail(t));list.append(tr)});
-    }
-    function esc(v){const d=document.createElement('div');d.textContent=v??'';return d.innerHTML}
-    function showDetail(t){document.querySelector('#detail-title').textContent=t.id+' — '+t.subject;document.querySelector('#detail-content').innerHTML=`<div class="detail-block"><small>Reported by</small>${esc(t.name)}<br><span style="color:#746e6b">${esc(t.email)}</span></div><div class="detail-block"><small>Status</small><select id="status-change"><option${t.status==='Open'?' selected':''}>Open</option><option${t.status==='In Progress'?' selected':''}>In Progress</option><option${t.status==='Resolved'?' selected':''}>Resolved</option></select></div><div class="detail-block"><small>Category</small>${esc(t.category)}</div><div class="detail-block"><small>Priority</small><span class="priority ${t.priority.toLowerCase()}">${esc(t.priority)}</span></div><div class="detail-block full"><small>Description</small>${esc(t.description)}</div><div class="detail-block"><small>Created</small>${new Date(t.createdAt).toLocaleString()}</div><div class="detail-block"><small>Last updated</small>${new Date(t.updatedAt).toLocaleString()}</div>`;detailModal.classList.add('open');document.querySelector('#status-change').addEventListener('change',async e=>{t.status=e.target.value;t.updatedAt=now();render();await persist('PATCH','/'+encodeURIComponent(t.id),{status:t.status,updatedAt:t.updatedAt});});}
-    document.querySelector('#raise-button').addEventListener('click',()=>raiseModal.classList.add('open'));document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>raiseModal.classList.remove('open')));document.querySelector('[data-detail-close]').addEventListener('click',()=>detailModal.classList.remove('open'));
-    [raiseModal,detailModal].forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
-    document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));render()}));search.addEventListener('input',render);
-    form.addEventListener('submit',async e=>{e.preventDefault();const d=new FormData(form);const max=tickets.reduce((m,t)=>Math.max(m,Number(String(t.id).split('-').pop())||0),1041);const t={id:'PAY-'+pad(max+1),subject:d.get('subject').trim(),description:d.get('description').trim(),category:d.get('category'),priority:d.get('priority'),status:'Open',name:d.get('name').trim(),email:d.get('email').trim(),createdAt:now(),updatedAt:now()};tickets.unshift(t);render();raiseModal.classList.remove('open');form.reset();await persist('POST','',t)});
-    document.querySelector('#date').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'});load();
-  })();
-  </script>
+  <h1>Pay1</h1>
 </body>
 </html>
